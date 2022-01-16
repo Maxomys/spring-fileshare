@@ -1,6 +1,7 @@
 package com.github.maxomys.springfileshare.repository;
 
 import com.github.maxomys.springfileshare.model.AppUser;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
