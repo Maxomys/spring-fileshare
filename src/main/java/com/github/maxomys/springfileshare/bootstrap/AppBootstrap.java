@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 
 @Component
@@ -45,7 +46,7 @@ public class AppBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         FileLink link1 = new FileLink();
         link1.setRemainingUses(10);
-        link1.setUrl("http://test.com/file123");
+        link1.setUrl(UUID.randomUUID());
         link1.setStoredFile(file1);
 
         file1.getLinks().add(link1);
@@ -60,7 +61,7 @@ public class AppBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         FileLink link2 = new FileLink();
         link2.setRemainingUses(10);
-        link2.setUrl("http://test.com/file123");
+        link2.setUrl(UUID.randomUUID());
         link2.setStoredFile(file2);
 
         file2.getLinks().add(link2);

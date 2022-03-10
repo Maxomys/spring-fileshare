@@ -10,9 +10,9 @@ import lombok.Data;
 public class FileLinkDto {
     
     private Long id;
+    private Long storedFileId;
     private String url;
     private Integer remainingUses;
     private LocalDateTime expirationTime;
-    private Long storedFileId;
 
 }

@@ -1,7 +1,12 @@
 package com.github.maxomys.springfileshare.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
+import com.github.maxomys.springfileshare.api.controller.dto.FileLinkDto;
+import com.github.maxomys.springfileshare.api.mapper.FileLinkMapper;
 import com.github.maxomys.springfileshare.exception.ResourceNotFoundException;
 import com.github.maxomys.springfileshare.model.FileLink;
 import com.github.maxomys.springfileshare.model.StoredFile;
@@ -18,15 +23,28 @@ public class FileLinkServiceImpl implements FileLinkService {
 
     private final StoredFileRepository storedFileRepository;
     private final FileLinkRepository fileLinkRepository;
+    private final FileLinkMapper fileLinkMapper;
 
     @Override
-    public void addLinkToFile(Long fileId, Integer uses, String expirationDateTime) {
-        StoredFile storedFile = storedFileRepository.findById(fileId).orElseThrow(
-            () -> new ResourceNotFoundException("StoredFile not found for id: " + fileId));
-        
+    public List<FileLinkDto> getFileLinksByFileId(Long fileId) {
+        return fileLinkRepository.findFileLinksByStoredFile_Id(fileId).stream()
+                .map(fileLinkMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public FileLink getFileLinkByUuid(String uuid) {
+        return fileLinkRepository.findFileLinkByUrl(UUID.fromString(uuid)).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Override
+    public void addLinkToFile(FileLinkDto dto) {
+        StoredFile storedFile = storedFileRepository.findById(dto.getStoredFileId()).orElseThrow(
+            () -> new ResourceNotFoundException("StoredFile not found for id: " + dto.getStoredFileId()));
+
         FileLink fileLink = new FileLink();
-        fileLink.setRemainingUses(uses);
-        fileLink.setExpirationTime(LocalDateTime.parse(expirationDateTime));
+        fileLink.setRemainingUses(dto.getRemainingUses());
+        fileLink.setExpirationTime(dto.getExpirationTime());
         fileLink.setStoredFile(storedFile);
 
         fileLinkRepository.save(fileLink);
@@ -38,7 +56,7 @@ public class FileLinkServiceImpl implements FileLinkService {
             () -> new ResourceNotFoundException("StoredFile not found for id: " + fileId));
 
         fileLinkRepository.deleteById(storedFile.getLinks().stream()
-            .filter((link) -> link.getId() == linkId).findFirst().orElse(null));
+            .filter((link) -> link.getId().equals(linkId)).findFirst().orElseThrow(ResourceNotFoundException::new).getId());
     }
     
 }

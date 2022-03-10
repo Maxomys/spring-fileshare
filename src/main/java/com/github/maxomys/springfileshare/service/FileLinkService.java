@@ -1,10 +1,17 @@
 package com.github.maxomys.springfileshare.service;
 
-import java.time.LocalDateTime;
+import com.github.maxomys.springfileshare.api.controller.dto.FileLinkDto;
+import com.github.maxomys.springfileshare.model.FileLink;
+
+import java.util.List;
 
 public interface FileLinkService {
 
-    void addLinkToFile(Long fileId, Integer uses, String expirationDateTime);
+    List<FileLinkDto> getFileLinksByFileId(Long fileId);
+
+    FileLink getFileLinkByUuid(String uuid);
+
+    void addLinkToFile(FileLinkDto dto);
 
     void removeLinkFromFileById(Long fileId, Long linkId);
 

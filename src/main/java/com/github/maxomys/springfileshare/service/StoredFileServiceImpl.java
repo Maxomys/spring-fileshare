@@ -11,7 +11,9 @@ import java.util.UUID;
 
 import com.github.maxomys.springfileshare.exception.ResourceNotFoundException;
 import com.github.maxomys.springfileshare.model.AppUser;
+import com.github.maxomys.springfileshare.model.FileLink;
 import com.github.maxomys.springfileshare.model.StoredFile;
+import com.github.maxomys.springfileshare.repository.FileLinkRepository;
 import com.github.maxomys.springfileshare.repository.StoredFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,7 @@ public class StoredFileServiceImpl implements StoredFileService {
     String RESOURCES_ROOT;
 
     private final StoredFileRepository storedFileRepository;
+    private final FileLinkRepository fileLinkRepository;
 
     @Override
     public StoredFile findById(Long id) {
@@ -85,6 +88,23 @@ public class StoredFileServiceImpl implements StoredFileService {
     public Resource loadFileById(Long id) {
         StoredFile foundFile = storedFileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find file for id: " + id));
+
+        Resource resource = new FileSystemResource(Paths.get(RESOURCES_ROOT, foundFile.getFileName()));
+        if (resource.exists()) {
+            return resource;
+        } else {
+            throw new RuntimeException("Could not load the file");
+        }
+    }
+
+    @Override
+    public Resource loadFileByLink(FileLink fileLink) {
+        StoredFile foundFile = fileLink.getStoredFile();
+
+        fileLink.setRemainingUses(fileLink.getRemainingUses() - 1);
+        if (fileLink.getRemainingUses() <= 0) {
+            fileLinkRepository.deleteById(fileLink.getId());
+        }
 
         Resource resource = new FileSystemResource(Paths.get(RESOURCES_ROOT, foundFile.getFileName()));
         if (resource.exists()) {
