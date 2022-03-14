@@ -1,6 +1,6 @@
 package com.github.maxomys.springfileshare.api.controller;
 
-import com.github.maxomys.springfileshare.api.controller.dto.FileLinkDto;
+import com.github.maxomys.springfileshare.api.dto.FileLinkDto;
 import com.github.maxomys.springfileshare.model.FileLink;
 import com.github.maxomys.springfileshare.model.StoredFile;
 import com.github.maxomys.springfileshare.service.FileLinkService;
@@ -8,7 +8,6 @@ import com.github.maxomys.springfileshare.service.StoredFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,7 @@ public class LinkController {
     private final FileLinkService fileLinkService;
     private final StoredFileService storedFileService;
 
-    @PostMapping
+    @PostMapping("/link")
     @ResponseStatus(HttpStatus.CREATED)
     public void addNewLinkToFile(@RequestBody FileLinkDto fileLinkDto) {
         fileLinkService.addLinkToFile(fileLinkDto);

@@ -1,6 +1,6 @@
 package com.github.maxomys.springfileshare.service;
 
-import com.github.maxomys.springfileshare.api.controller.dto.FileLinkDto;
+import com.github.maxomys.springfileshare.api.dto.FileLinkDto;
 import com.github.maxomys.springfileshare.model.FileLink;
 
 import java.util.List;

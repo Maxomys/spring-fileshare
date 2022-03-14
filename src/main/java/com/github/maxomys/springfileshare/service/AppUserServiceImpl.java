@@ -1,6 +1,6 @@
 package com.github.maxomys.springfileshare.service;
 
-import com.github.maxomys.springfileshare.api.controller.dto.UserDto;
+import com.github.maxomys.springfileshare.api.dto.UserDto;
 import com.github.maxomys.springfileshare.exception.ResourceNotFoundException;
 import com.github.maxomys.springfileshare.model.AppUser;
 import com.github.maxomys.springfileshare.model.Role;

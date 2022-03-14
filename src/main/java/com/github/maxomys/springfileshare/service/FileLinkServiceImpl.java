@@ -1,11 +1,10 @@
 package com.github.maxomys.springfileshare.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.github.maxomys.springfileshare.api.controller.dto.FileLinkDto;
+import com.github.maxomys.springfileshare.api.dto.FileLinkDto;
 import com.github.maxomys.springfileshare.api.mapper.FileLinkMapper;
 import com.github.maxomys.springfileshare.exception.ResourceNotFoundException;
 import com.github.maxomys.springfileshare.model.FileLink;
@@ -46,6 +45,7 @@ public class FileLinkServiceImpl implements FileLinkService {
         fileLink.setRemainingUses(dto.getRemainingUses());
         fileLink.setExpirationTime(dto.getExpirationTime());
         fileLink.setStoredFile(storedFile);
+        fileLink.setUrl(UUID.randomUUID());
 
         fileLinkRepository.save(fileLink);
     }

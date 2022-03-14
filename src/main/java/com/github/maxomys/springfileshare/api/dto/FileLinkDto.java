@@ -1,4 +1,4 @@
-package com.github.maxomys.springfileshare.api.controller.dto;
+package com.github.maxomys.springfileshare.api.dto;
 
 import java.time.LocalDateTime;
 

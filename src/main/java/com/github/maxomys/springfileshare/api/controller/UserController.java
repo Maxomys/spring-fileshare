@@ -1,6 +1,6 @@
 package com.github.maxomys.springfileshare.api.controller;
 
-import com.github.maxomys.springfileshare.api.controller.dto.UserDto;
+import com.github.maxomys.springfileshare.api.dto.UserDto;
 import com.github.maxomys.springfileshare.model.AppUser;
 import com.github.maxomys.springfileshare.service.AppUserService;
 import lombok.RequiredArgsConstructor;
