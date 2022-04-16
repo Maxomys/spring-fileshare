@@ -62,6 +62,8 @@ public class JtwAuthorizationFilter extends OncePerRequestFilter {
                 response.getWriter().write(tokenExpiredResponseBody(e));
             }
             
+        } else {
+            filterChain.doFilter(request, response);
         }
 
     }
