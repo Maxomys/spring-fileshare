@@ -20,7 +20,7 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'webstore'
+      - 'fileshare-app'
       - '--image'
       - 'gcr.io/$PROJECT_ID/fileshare-app:$COMMIT_SHA'
       - '--region'
