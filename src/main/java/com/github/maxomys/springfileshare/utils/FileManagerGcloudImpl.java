@@ -23,7 +23,7 @@ import java.io.IOException;
 public class FileManagerGcloudImpl implements FileManager {
 
     @Value("${BUCKET_NAME}")
-    private final String BUCKET_NAME;
+    private String BUCKET_NAME;
 
     private final Storage storage;
 
