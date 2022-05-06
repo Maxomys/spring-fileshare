@@ -56,7 +56,7 @@ public class FileController {
         }
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=" + storedFile.getOriginalFileName());
+        response.setHeader("Content-Disposition", "attachment");
         response.setHeader("filename", storedFile.getOriginalFileName());
 
         return storedFileService.loadFileById(fileId);
