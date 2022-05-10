@@ -56,7 +56,8 @@ public class FileLinkServiceImpl implements FileLinkService {
             () -> new ResourceNotFoundException("StoredFile not found for id: " + fileId));
 
         fileLinkRepository.deleteById(storedFile.getLinks().stream()
-            .filter((link) -> link.getId().equals(linkId)).findFirst().orElseThrow(ResourceNotFoundException::new).getId());
+            .filter((link) ->
+                    link.getId().equals(linkId)).findFirst().orElseThrow(ResourceNotFoundException::new).getId());
     }
     
 }

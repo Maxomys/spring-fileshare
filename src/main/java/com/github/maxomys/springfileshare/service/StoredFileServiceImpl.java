@@ -26,12 +26,14 @@ public class StoredFileServiceImpl implements StoredFileService {
 
     @Override
     public StoredFile findById(Long id) {
-        return storedFileRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("File not found for id: " + id));
+        return storedFileRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("File not found for id: " + id));
     }
 
     @Override
     public StoredFile findByFilename(String fileName) {
-        return storedFileRepository.findStoredFileByFileName(fileName).orElseThrow(() -> new ResourceNotFoundException("File not found for filename: " + fileName));
+        return storedFileRepository.findStoredFileByFileName(fileName)
+                .orElseThrow(() -> new ResourceNotFoundException("File not found for filename: " + fileName));
     }
 
     @Override
