@@ -3,7 +3,6 @@
 
 Spring boot project. File uploading and sharing.
 
-[Demo](https://fileshare-frontend-k5gnvvjdea-lz.a.run.app)
 
 ### Technologies
 - Spring boot
