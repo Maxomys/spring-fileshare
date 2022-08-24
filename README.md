@@ -1,5 +1,6 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Maxomys/spring-fileshare/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Maxomys/spring-fileshare/tree/master)
 
-## Spring boot filesharing app
+## Spring boot file sharing app
 
 Spring boot project. File uploading and sharing.
 
